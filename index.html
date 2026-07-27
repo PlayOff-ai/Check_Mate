@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Kids chess classes by Coach Soni Singh in Vidyanagar, JSW Township. Fun home-based chess coaching for ages 5-20.">
+<title>Soni Singh Chess Classes</title>
+<style>
+:root{--ink:#172554;--blue:#2563eb;--yellow:#facc15;--cream:#fffaf0;--white:#fff;--green:#16a34a}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,sans-serif;color:var(--ink);background:var(--cream);line-height:1.6}
+nav{position:sticky;top:0;z-index:10;background:rgba(255,255,255,.94);backdrop-filter:blur(10px);display:flex;justify-content:space-between;align-items:center;padding:14px max(5vw,20px);box-shadow:0 2px 18px #17255412}
+.logo{font-weight:900;font-size:1.15rem}.logo span{color:var(--blue)}nav a{text-decoration:none;color:var(--ink);font-weight:700;margin-left:20px}
+.btn{display:inline-block;border:0;border-radius:999px;padding:13px 22px;background:var(--blue);color:#fff!important;text-decoration:none;font-weight:800;cursor:pointer;box-shadow:0 8px 20px #2563eb30}.btn.alt{background:var(--yellow);color:var(--ink)!important}
+.hero{min-height:76vh;display:grid;grid-template-columns:1.1fr .9fr;align-items:center;gap:35px;padding:70px max(7vw,24px);background:radial-gradient(circle at 85% 25%,#fde68a 0 12%,transparent 13%),linear-gradient(135deg,#eff6ff,#fff7d6)}
+.tag{display:inline-block;background:#dbeafe;color:#1d4ed8;padding:7px 13px;border-radius:999px;font-weight:800}
+h1{font-size:clamp(2.6rem,6vw,5.2rem);line-height:.98;margin:18px 0}h1 em{font-style:normal;color:var(--blue)}.hero p{font-size:1.15rem;max-width:620px}
+.board{width:min(430px,90vw);aspect-ratio:1;margin:auto;display:grid;grid-template-columns:repeat(8,1fr);border:12px solid var(--ink);border-radius:20px;overflow:hidden;transform:rotate(3deg);box-shadow:0 25px 50px #17255430}.sq{display:grid;place-items:center;font-size:clamp(20px,4vw,42px);background:#fff}.sq.d{background:#4ade80}
+section{padding:75px max(7vw,24px)}.title{text-align:center;font-size:clamp(2rem,4vw,3rem);margin:0 0 12px}.sub{text-align:center;max-width:700px;margin:0 auto 35px;color:#475569}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}.card{background:#fff;padding:28px;border-radius:22px;box-shadow:0 12px 35px #17255410}.icon{font-size:2.2rem}.card h3{margin:8px 0}
+.details{background:var(--ink);color:#fff}.details .sub{color:#cbd5e1}.facts{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;max-width:1050px;margin:auto}.fact{text-align:center;background:#ffffff12;padding:24px;border:1px solid #ffffff20;border-radius:18px}.fact b{display:block;font-size:1.25rem;color:#fde047}
+.register{display:grid;grid-template-columns:.8fr 1.2fr;gap:35px;align-items:start}.register h2{font-size:2.5rem;margin-top:0}form{background:#fff;padding:28px;border-radius:24px;box-shadow:0 15px 40px #17255415}.grid{display:grid;grid-template-columns:1fr 1fr;gap:15px}label{font-weight:800;font-size:.9rem}input,select,textarea{width:100%;padding:13px;margin-top:6px;border:2px solid #e2e8f0;border-radius:12px;font:inherit}textarea{min-height:95px;resize:vertical}.field{margin-bottom:15px}.full{grid-column:1/-1}.note{font-size:.88rem;color:#64748b}
+.contact{text-align:center;background:#fef3c7}.contact .buttons{display:flex;justify-content:center;gap:12px;flex-wrap:wrap}
+footer{text-align:center;padding:25px;background:#0f172a;color:#cbd5e1}
+@media(max-width:800px){nav .links{display:none}.hero,.register{grid-template-columns:1fr}.hero{text-align:center;padding-top:50px}.hero p{margin-left:auto;margin-right:auto}.board{width:min(330px,85vw)}.cards{grid-template-columns:1fr}.facts{grid-template-columns:1fr 1fr}.grid{grid-template-columns:1fr}.full{grid-column:auto}}
+</style>
+</head>
+<body>
+<nav><div class="logo">♟️ <span> CheckMate </span> Chess Classes</div><div class="links"><a href="#about">About</a><a href="#classes">Classes</a><a href="#register">Register</a><a class="btn" href="#contact">Contact</a></div></nav>
+
+<header class="hero">
+<div><span class="tag">♟ Fun • Learn • Grow</span><h1>Make Your Child's <em>Next Move</em> a Smart One!</h1><p>Fun and engaging home-based chess classes with <strong>Coach Soni Singh</strong>. Build concentration, confidence, patience and strategic thinking—one move at a time.</p><p><a class="btn" href="#register">Register for Classes</a> &nbsp; <a class="btn alt" href="tel:+919480240742">Call Coach</a></p></div>
+<div id="board" class="board" aria-label="Decorative chess board"></div>
+</header>
+
+<section id="about">
+<h2 class="title">Why Learn Chess? 🧠</h2><p class="sub">Chess is more than a game. Regular practice can encourage children to think ahead, solve problems and make thoughtful decisions.</p>
+<div class="cards">
+<div class="card"><div class="icon">🎯</div><h3>Better Focus</h3><p>Practice concentration and careful observation while learning to plan every move.</p></div>
+<div class="card"><div class="icon">💡</div><h3>Smart Thinking</h3><p>Develop logical thinking, pattern recognition, problem-solving and decision-making skills.</p></div>
+<div class="card"><div class="icon">🏆</div><h3>Build Confidence</h3><p>Learn from wins and mistakes in a friendly environment while steadily improving your game.</p></div>
+</div>
+</section>
+
+<section id="classes" class="details">
+<h2 class="title">Class Details</h2><p class="sub">Simple, accessible chess coaching for kids and young learners.</p>
+<div class="facts">
+<div class="fact">👩‍🏫<b>Coach</b>Soni Singh</div>
+<div class="fact">🧒<b>Age Group</b>5–20 years</div>
+<div class="fact">🕒<b>Timings</b>Afternoon 3 PM to 6 PM (Monday to Thursday)</div>
+<div class="fact">💰<b>Fee</b>₹700</div>
+</div>
+</section>
+
+<section id="register">
+<div class="register">
+<div><span class="tag">Online Registration</span><h2>Ready to start the chess journey? ♟️</h2><p>Fill in the form and tap <strong>Send Registration</strong>. Your details will open in WhatsApp so you can send the registration directly to Coach Soni Singh.</p><p>📍 <strong>Class location:</strong><br>T3/17, Vidyanagar, JSW Township</p><p>📞 <strong>Phone:</strong> 9480240742</p></div>
+<form id="regForm">
+<div class="grid">
+<div class="field"><label>Student Name<input id="student" required placeholder="Enter student's name"></label></div>
+<div class="field"><label>Age<input id="age" required type="number" min="5" max="20" placeholder="5–20"></label></div>
+<div class="field"><label>Parent / Guardian Name<input id="parent" required placeholder="Enter parent name"></label></div>
+<div class="field"><label>Phone Number<input id="phone" required type="tel" placeholder="10-digit number"></label></div>
+<div class="field"><label>Address(House Number, township)<input id="address" required placeholder="Enter address"></label></div>
+<div class="field full"><label>Chess Experience<select id="level"><option>Complete Beginner</option><option>Knows the basics</option><option>Intermediate</option></select></label></div>
+<div class="field full"><label>Preferred Afternoon Timing<input id="time" placeholder="Example: 4:00 PM"></label></div>
+<div class="field full"><label>Message (optional)<textarea id="message" placeholder="Anything you'd like the coach to know?"></textarea></label></div>
+</div>
+<button class="btn" type="submit">Send Registration on WhatsApp →</button>
+<p class="note">Submitting opens WhatsApp with your registration details. You can review the message before sending it.</p>
+</form>
+</div>
+</section>
+
+<section id="contact" class="contact">
+<h2 class="title">Have a Question?</h2><p class="sub">Contact Coach Soni Singh for class availability and further details.</p>
+<div class="buttons"><a class="btn" href="tel:+919480240742">📞 Call 9480240742</a><a class="btn" style="background:#16a34a" href="https://wa.me/919480240742?text=Hi%20Soni%20Singh%2C%20I%20am%20interested%20in%20your%20chess%20classes." target="_blank" rel="noopener">💬 WhatsApp</a></div>
+</section>
+
+<footer>♟️ CheckMate Chess Classes • Vidyanagar, JSW Township<br><small>Learn • Think • Play • Grow</small></footer>
+<script>
+const pieces=["♜","♞","♝","♛","♚","♝","♞","♜","♟","♟","♟","♟","♟","♟","♟","♟","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","♙","♙","♙","♙","♙","♙","♙","♙","♖","♘","♗","♕","♔","♗","♘","♖"];
+const board=document.getElementById("board");
+pieces.forEach((p,i)=>{let s=document.createElement("div");s.className="sq "+(((Math.floor(i/8)+i%8)%2)?"d":"");s.textContent=p;board.appendChild(s)});
+document.getElementById("regForm").addEventListener("submit",e=>{
+ e.preventDefault();
+ const val=id=>document.getElementById(id).value.trim();
+ const text=`Hi Coach Soni Singh! I would like to register for chess classes.\n\nStudent: ${val("student")}\nAge: ${val("age")}\nParent/Guardian: ${val("parent")}\nPhone: ${val("phone")}\nExperience: ${val("level")}\nPreferred timing: ${val("time")||"Any afternoon time"}\nMessage: ${val("message")||"None"}\n\nPlease let me know the next steps.`;
+ window.open("https://wa.me/919480240742?text="+encodeURIComponent(text),"_blank");
+});
+</script>
+</body></html>
