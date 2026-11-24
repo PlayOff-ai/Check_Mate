@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
   <meta name="description" content="CheckMate Chess Classes by Coach Soni Singh in Vidyanagar, JSW Township. Fun, structured home-based chess coaching for ages 5–20. Mon–Thu, 3:00 PM – 6:00 PM." />
   <title>CheckMate Chess Classes — Coach Soni Singh | Vidyanagar, JSW Township</title>
 
@@ -22,11 +22,11 @@
       --text-main: #f1f5f9;
       --text-muted: #cbd5e1;
       --text-dim: #94a3b8;
-      --glass-bg: rgba(12, 23, 52, 0.56);
-      --glass-bg-strong: rgba(10, 19, 44, 0.72);
-      --glass-card: rgba(18, 33, 72, 0.58);
+      --glass-bg: rgba(12, 23, 52, 0.58);
+      --glass-bg-strong: rgba(10, 19, 44, 0.76);
+      --glass-card: rgba(18, 33, 72, 0.6);
       --glass-border: rgba(255, 255, 255, 0.14);
-      --glass-border-gold: rgba(250, 204, 21, 0.32);
+      --glass-border-gold: rgba(250, 204, 21, 0.34);
       --green-wa: #16a34a;
       --radius-lg: 24px;
       --radius-md: 16px;
@@ -44,7 +44,9 @@
 
     html {
       scroll-behavior: smooth;
-      cursor: var(--cursor-queen);
+      overflow-x: hidden;
+      overflow-x: clip;
+      -webkit-text-size-adjust: 100%;
     }
 
     body {
@@ -54,27 +56,26 @@
       background-color: var(--navy-deep);
       line-height: 1.65;
       overflow-x: hidden;
+      overflow-x: clip;
+      overflow-wrap: break-word;
       -webkit-font-smoothing: antialiased;
-      cursor: var(--cursor-queen);
+      -webkit-tap-highlight-color: rgba(250, 204, 21, 0.16);
     }
 
-    /* Energized Golden-Blue Chess Queen Cursor on Interactive Controls */
-    a,
-    button,
-    select,
-    label[for],
-    .btn,
-    .glass-card,
-    .mini-btn,
-    .faq-trigger,
-    .menu-toggle,
-    .wallpaper-control,
-    [role="button"] {
-      cursor: var(--cursor-queen-active);
+    img, svg, canvas {
+      max-width: 100%;
+    }
+
+    /* Anchor offset so sticky navbar never obscures section headings */
+    section[id],
+    header[id] {
+      scroll-margin-top: 84px;
     }
 
     /* =========================================================
-       CUSTOM CHESS QUEEN POINTER AURA & CLICK SPARKLE RIPPLE
+       CUSTOM CHESS QUEEN CURSOR, AURA & SPARKLES (DESKTOP ONLY)
+       Strictly scoped to fine-pointer hover-capable devices so
+       mobile/touchscreens never show stuck cursors or ghost halos.
        ========================================================= */
     .queen-cursor-aura,
     .queen-ripple-layer {
@@ -83,6 +84,25 @@
     }
 
     @media (hover: hover) and (pointer: fine) {
+      html,
+      body {
+        cursor: var(--cursor-queen);
+      }
+
+      a,
+      button,
+      select,
+      label[for],
+      .btn,
+      .glass-card,
+      .mini-btn,
+      .faq-trigger,
+      .menu-toggle,
+      .wallpaper-control,
+      [role="button"] {
+        cursor: var(--cursor-queen-active);
+      }
+
       .queen-cursor-aura {
         display: block;
         position: fixed;
@@ -192,6 +212,8 @@
     .page-shell {
       position: relative;
       z-index: 1;
+      width: 100%;
+      min-height: 100vh;
     }
 
     /* =========================================================
@@ -204,19 +226,19 @@
       height: 3px;
       width: 0%;
       background: linear-gradient(90deg, var(--royal-blue), var(--gold), var(--royal-blue-bright));
-      z-index: 100;
+      z-index: 110;
       transition: width 0.08s linear;
       box-shadow: 0 0 12px rgba(250, 204, 21, 0.6);
     }
 
     /* =========================================================
-       STICKY FROSTED-GLASS NAVIGATION
+       STICKY FROSTED-GLASS NAVIGATION & MOBILE DRAWER
        ========================================================= */
     .navbar {
       position: sticky;
       top: 0;
-      z-index: 60;
-      background: rgba(8, 16, 38, 0.72);
+      z-index: 80;
+      background: rgba(8, 16, 38, 0.78);
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
       border-bottom: 1px solid var(--glass-border);
@@ -224,26 +246,28 @@
     }
 
     .navbar.scrolled {
-      background: rgba(6, 13, 31, 0.88);
-      box-shadow: 0 10px 32px rgba(2, 6, 23, 0.45);
+      background: rgba(6, 13, 31, 0.92);
+      box-shadow: 0 10px 32px rgba(2, 6, 23, 0.5);
     }
 
     .nav-inner {
       max-width: 1200px;
       margin: 0 auto;
-      padding: 14px max(4vw, 20px);
+      padding: 12px max(4vw, 16px);
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 16px;
+      gap: 12px;
+      min-height: 68px;
     }
 
     .brand {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 11px;
       text-decoration: none;
       color: var(--ivory);
+      min-width: 0;
     }
 
     .brand-icon {
@@ -251,11 +275,12 @@
       height: 42px;
       border-radius: 13px;
       background: linear-gradient(135deg, var(--royal-blue), var(--navy-rich));
-      border: 1px solid rgba(250, 204, 21, 0.4);
+      border: 1px solid rgba(250, 204, 21, 0.42);
       display: grid;
       place-items: center;
       font-size: 1.35rem;
       color: var(--gold);
+      flex-shrink: 0;
       box-shadow: 0 6px 18px rgba(37, 99, 235, 0.35);
       transition: transform 0.25s ease;
     }
@@ -268,12 +293,16 @@
       display: flex;
       flex-direction: column;
       line-height: 1.15;
+      min-width: 0;
     }
 
     .brand-title {
       font-weight: 900;
-      font-size: 1.15rem;
+      font-size: clamp(0.98rem, 2.8vw, 1.15rem);
       letter-spacing: -0.02em;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     .brand-title span {
@@ -281,10 +310,10 @@
     }
 
     .brand-sub {
-      font-size: 0.7rem;
+      font-size: 0.68rem;
       font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: 0.14em;
+      letter-spacing: 0.13em;
       color: var(--text-dim);
     }
 
@@ -322,68 +351,154 @@
       box-shadow: 0 10px 26px rgba(250, 204, 21, 0.42);
     }
 
-    /* Mobile Hamburger Button */
+    /* Accessible 44x44px Animated Hamburger Button */
     .menu-toggle {
       display: none;
       width: 44px;
       height: 44px;
+      padding: 0;
       border-radius: 12px;
       border: 1px solid var(--glass-border);
       background: rgba(255, 255, 255, 0.08);
       color: var(--ivory);
-      cursor: pointer;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
-      transition: background 0.2s ease;
+      gap: 5px;
+      flex-shrink: 0;
+      transition: background 0.2s ease, border-color 0.2s ease;
     }
 
-    .menu-toggle:hover {
-      background: rgba(255, 255, 255, 0.16);
+    .menu-toggle:hover,
+    .menu-toggle[aria-expanded="true"] {
+      background: rgba(37, 99, 235, 0.28);
+      border-color: rgba(250, 204, 21, 0.45);
     }
 
+    .menu-toggle .bar {
+      display: block;
+      width: 20px;
+      height: 2px;
+      border-radius: 2px;
+      background: var(--ivory);
+      transition: transform 0.28s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.2s ease, background 0.2s ease;
+      transform-origin: center;
+    }
+
+    .menu-toggle[aria-expanded="true"] .bar:nth-child(1) {
+      transform: translateY(7px) rotate(45deg);
+      background: var(--gold);
+    }
+
+    .menu-toggle[aria-expanded="true"] .bar:nth-child(2) {
+      opacity: 0;
+      transform: scaleX(0);
+    }
+
+    .menu-toggle[aria-expanded="true"] .bar:nth-child(3) {
+      transform: translateY(-7px) rotate(-45deg);
+      background: var(--gold);
+    }
+
+    /* Mobile Drawer Backdrop (tap outside to close) */
+    .drawer-backdrop {
+      position: fixed;
+      inset: 0;
+      background: rgba(3, 7, 18, 0.62);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      z-index: 75;
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transition: opacity 0.26s ease, visibility 0.26s ease;
+    }
+
+    .drawer-backdrop.open {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+    }
+
+    /* Smooth Animated Mobile Navigation Drawer */
     .mobile-drawer {
-      display: none;
-      flex-direction: column;
-      gap: 6px;
-      padding: 12px max(4vw, 20px) 20px;
-      border-top: 1px solid var(--glass-border);
-      background: rgba(8, 16, 38, 0.94);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
+      display: grid;
+      grid-template-rows: 0fr;
+      opacity: 0;
+      visibility: hidden;
+      transition: grid-template-rows 0.3s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.24s ease, visibility 0.24s ease;
+      background: rgba(7, 15, 36, 0.97);
+      backdrop-filter: blur(22px);
+      -webkit-backdrop-filter: blur(22px);
+      border-top: 1px solid transparent;
     }
 
     .mobile-drawer.open {
-      display: flex;
+      grid-template-rows: 1fr;
+      opacity: 1;
+      visibility: visible;
+      border-top-color: var(--glass-border);
+      box-shadow: 0 22px 48px rgba(2, 6, 23, 0.72);
     }
 
-    .mobile-drawer a {
+    .mobile-drawer-inner {
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      padding: 0 max(4vw, 16px);
+      transition: padding 0.3s ease;
+    }
+
+    .mobile-drawer.open .mobile-drawer-inner {
+      padding: 14px max(4vw, 16px) 22px;
+    }
+
+    .mobile-drawer a.drawer-link {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 48px;
       text-decoration: none;
       color: var(--ivory);
       font-weight: 700;
-      padding: 12px 14px;
-      border-radius: 12px;
+      font-size: 1rem;
+      padding: 12px 16px;
+      border-radius: 14px;
       transition: background 0.2s ease, color 0.2s ease;
     }
 
-    .mobile-drawer a:hover {
-      background: rgba(37, 99, 235, 0.24);
+    .mobile-drawer a.drawer-link:hover,
+    .mobile-drawer a.drawer-link:active {
+      background: rgba(37, 99, 235, 0.26);
       color: var(--gold);
     }
 
-    .mobile-drawer-actions {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 10px;
-      margin-top: 8px;
+    .mobile-drawer a.drawer-cta {
+      margin-top: 6px;
+      min-height: 48px;
+      justify-content: center;
+      background: linear-gradient(135deg, var(--gold-soft), var(--gold));
+      color: #0b132b;
+      font-weight: 800;
+      border-radius: var(--radius-pill);
+      box-shadow: 0 8px 22px rgba(250, 204, 21, 0.28);
+    }
+
+    .mobile-drawer a.drawer-cta:hover,
+    .mobile-drawer a.drawer-cta:active {
+      background: linear-gradient(135deg, #fef08a, var(--gold));
+      color: #060d1f;
     }
 
     /* =========================================================
        BUTTONS & SHARED UTILITIES
        ========================================================= */
     .container {
+      width: 100%;
       max-width: 1200px;
       margin: 0 auto;
-      padding: 0 max(4vw, 20px);
+      padding: 0 max(4vw, 18px);
     }
 
     .btn {
@@ -391,14 +506,15 @@
       align-items: center;
       justify-content: center;
       gap: 9px;
+      min-height: 48px;
       border: 0;
       border-radius: var(--radius-pill);
-      padding: 14px 26px;
+      padding: 13px 26px;
       font-family: inherit;
       font-size: 0.98rem;
       font-weight: 800;
       text-decoration: none;
-      cursor: pointer;
+      text-align: center;
       transition: transform 0.22s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.22s ease, background 0.22s ease;
     }
 
@@ -439,12 +555,12 @@
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      padding: 7px 16px;
+      padding: 7px 15px;
       border-radius: var(--radius-pill);
       background: rgba(37, 99, 235, 0.22);
       border: 1px solid rgba(96, 165, 250, 0.38);
       color: #bfdbfe;
-      font-size: 0.82rem;
+      font-size: 0.8rem;
       font-weight: 800;
       letter-spacing: 0.04em;
       backdrop-filter: blur(8px);
@@ -457,11 +573,11 @@
     }
 
     .section {
-      padding: 84px 0;
+      padding: clamp(54px, 7vw, 84px) 0;
     }
 
     .section-band {
-      background: rgba(8, 16, 38, 0.44);
+      background: rgba(8, 16, 38, 0.46);
       backdrop-filter: blur(8px);
       -webkit-backdrop-filter: blur(8px);
       border-top: 1px solid rgba(255, 255, 255, 0.08);
@@ -471,12 +587,12 @@
     .section-header {
       text-align: center;
       max-width: 700px;
-      margin: 0 auto 48px;
+      margin: 0 auto clamp(32px, 5vw, 48px);
     }
 
     .section-title {
-      font-size: clamp(2rem, 4vw, 2.9rem);
-      line-height: 1.12;
+      font-size: clamp(1.7rem, 4.2vw, 2.9rem);
+      line-height: 1.14;
       margin: 14px 0 12px;
       font-weight: 900;
       letter-spacing: -0.02em;
@@ -486,7 +602,13 @@
     .section-sub {
       margin: 0;
       color: var(--text-muted);
-      font-size: 1.05rem;
+      font-size: clamp(0.95rem, 2.2vw, 1.05rem);
+    }
+
+    .subsection-head {
+      text-align: center;
+      max-width: 680px;
+      margin: clamp(46px, 6vw, 68px) auto clamp(26px, 4vw, 38px);
     }
 
     /* Frosted Glass Surface Card */
@@ -500,32 +622,34 @@
       transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.3s ease, box-shadow 0.3s ease;
     }
 
-    .glass-card:hover {
-      transform: translateY(-6px);
-      border-color: var(--glass-border-gold);
-      box-shadow: 0 26px 60px rgba(2, 6, 23, 0.48), 0 0 24px rgba(250, 204, 21, 0.08);
+    @media (hover: hover) {
+      .glass-card:hover {
+        transform: translateY(-6px);
+        border-color: var(--glass-border-gold);
+        box-shadow: 0 26px 60px rgba(2, 6, 23, 0.48), 0 0 24px rgba(250, 204, 21, 0.08);
+      }
     }
 
     /* =========================================================
        HERO SECTION
        ========================================================= */
     .hero {
-      padding: 64px 0 88px;
+      padding: clamp(34px, 6vw, 68px) 0 clamp(54px, 7vw, 88px);
     }
 
     .hero-grid {
       display: grid;
       grid-template-columns: 1.08fr 0.92fr;
       align-items: center;
-      gap: 48px;
+      gap: clamp(28px, 4.5vw, 48px);
     }
 
     .hero h1 {
-      font-size: clamp(2.5rem, 5.2vw, 4.35rem);
-      line-height: 1.04;
+      font-size: clamp(2.15rem, 5.2vw, 4.35rem);
+      line-height: 1.06;
       font-weight: 900;
       letter-spacing: -0.03em;
-      margin: 20px 0 18px;
+      margin: 18px 0 16px;
       color: var(--ivory);
       text-shadow: 0 6px 28px rgba(2, 6, 23, 0.55);
     }
@@ -539,10 +663,10 @@
     }
 
     .hero-copy {
-      font-size: 1.12rem;
+      font-size: clamp(0.98rem, 2.4vw, 1.12rem);
       color: var(--text-muted);
       max-width: 580px;
-      margin: 0 0 28px;
+      margin: 0 0 26px;
     }
 
     .hero-copy strong {
@@ -552,29 +676,29 @@
     .hero-actions {
       display: flex;
       flex-wrap: wrap;
-      gap: 14px;
-      margin-bottom: 34px;
+      gap: 12px;
+      margin-bottom: 30px;
     }
 
     .hero-stats {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 12px;
+      gap: 10px;
       max-width: 560px;
     }
 
     .stat-pill {
-      background: rgba(15, 29, 64, 0.62);
+      background: rgba(15, 29, 64, 0.64);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
       border: 1px solid var(--glass-border);
-      border-radius: 16px;
-      padding: 12px 14px;
+      border-radius: 15px;
+      padding: 11px 12px;
     }
 
     .stat-pill span {
       display: block;
-      font-size: 0.72rem;
+      font-size: 0.7rem;
       text-transform: uppercase;
       letter-spacing: 0.06em;
       color: var(--text-dim);
@@ -583,7 +707,7 @@
 
     .stat-pill strong {
       display: block;
-      font-size: 0.96rem;
+      font-size: 0.94rem;
       color: var(--ivory);
       margin-top: 2px;
     }
@@ -606,8 +730,8 @@
       transform-style: preserve-3d;
       transition: transform 0.2s ease-out;
       will-change: transform;
-      border-radius: 26px;
-      padding: 16px;
+      border-radius: 24px;
+      padding: 15px;
       background:
         repeating-linear-gradient(
           118deg,
@@ -619,14 +743,14 @@
         linear-gradient(145deg, #6e3717 0%, #441c08 50%, #2a1004 100%);
       border: 1px solid rgba(250, 204, 21, 0.25);
       box-shadow:
-        0 32px 70px rgba(2, 6, 23, 0.7),
-        0 0 40px rgba(37, 99, 235, 0.18),
+        0 28px 64px rgba(2, 6, 23, 0.7),
+        0 0 38px rgba(37, 99, 235, 0.18),
         inset 0 1px 1px rgba(255, 235, 200, 0.32),
         inset 0 -3px 8px rgba(0, 0, 0, 0.5);
     }
 
     .board-bevel {
-      border-radius: 15px;
+      border-radius: 14px;
       padding: 3px;
       background: linear-gradient(135deg, rgba(250, 204, 21, 0.65), rgba(146, 64, 14, 0.45), rgba(253, 224, 71, 0.45));
     }
@@ -635,9 +759,10 @@
       position: relative;
       width: 100%;
       aspect-ratio: 1;
-      border-radius: 12px;
+      border-radius: 11px;
       overflow: hidden;
       user-select: none;
+      -webkit-user-select: none;
       background: #1e3a5f;
     }
 
@@ -675,7 +800,7 @@
 
     .coord-rank, .coord-file {
       position: absolute;
-      font-size: 9px;
+      font-size: clamp(7px, 1.8vw, 9px);
       font-weight: 800;
       line-height: 1;
       pointer-events: none;
@@ -725,7 +850,7 @@
     }
 
     .board-controls {
-      margin-top: 14px;
+      margin-top: 13px;
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -738,6 +863,7 @@
       align-items: center;
       gap: 8px;
       min-width: 0;
+      flex: 1;
     }
 
     .live-dot {
@@ -765,6 +891,7 @@
       overflow: hidden;
       text-overflow: ellipsis;
       font-size: 0.82rem;
+      text-align: left;
     }
 
     .move-text strong {
@@ -773,35 +900,38 @@
     }
 
     .move-text span {
-      color: rgba(254, 243, 199, 0.8);
+      color: rgba(254, 243, 199, 0.85);
       margin-left: 4px;
     }
 
     .board-btns {
       display: flex;
       align-items: center;
-      gap: 6px;
+      gap: 7px;
       flex-shrink: 0;
     }
 
     .mini-btn {
       display: inline-flex;
       align-items: center;
+      justify-content: center;
       gap: 5px;
-      padding: 6px 11px;
-      border-radius: 9px;
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      background: rgba(255, 255, 255, 0.1);
+      min-height: 36px;
+      min-width: 36px;
+      padding: 7px 12px;
+      border-radius: 10px;
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      background: rgba(255, 255, 255, 0.11);
       color: #fef3c7;
       font-family: inherit;
-      font-size: 0.76rem;
+      font-size: 0.78rem;
       font-weight: 700;
-      cursor: pointer;
       transition: background 0.2s ease;
     }
 
-    .mini-btn:hover {
-      background: rgba(255, 255, 255, 0.22);
+    .mini-btn:hover,
+    .mini-btn:active {
+      background: rgba(255, 255, 255, 0.24);
     }
 
     /* =========================================================
@@ -810,21 +940,21 @@
     .cards-3 {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 24px;
+      gap: 22px;
     }
 
     .feature-card {
-      padding: 30px;
+      padding: clamp(22px, 3vw, 30px);
     }
 
     .feature-icon {
-      width: 56px;
-      height: 56px;
+      width: 54px;
+      height: 54px;
       border-radius: 16px;
       display: grid;
       place-items: center;
-      font-size: 1.75rem;
-      margin-bottom: 18px;
+      font-size: 1.7rem;
+      margin-bottom: 16px;
       background: rgba(37, 99, 235, 0.22);
       border: 1px solid rgba(96, 165, 250, 0.35);
     }
@@ -836,19 +966,19 @@
 
     .feature-card h3 {
       margin: 0 0 10px;
-      font-size: 1.32rem;
+      font-size: 1.25rem;
       color: var(--ivory);
     }
 
     .feature-card p {
       margin: 0;
       color: var(--text-muted);
-      font-size: 0.96rem;
+      font-size: 0.95rem;
     }
 
     /* Curriculum Stages */
     .stage-card {
-      padding: 30px;
+      padding: clamp(22px, 3vw, 30px);
       display: flex;
       flex-direction: column;
     }
@@ -857,7 +987,7 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      margin-bottom: 18px;
+      margin-bottom: 16px;
     }
 
     .stage-num {
@@ -893,12 +1023,12 @@
 
     .stage-card h3 {
       margin: 0 0 8px;
-      font-size: 1.28rem;
+      font-size: 1.24rem;
       color: var(--ivory);
     }
 
     .stage-card .stage-desc {
-      margin: 0 0 18px;
+      margin: 0 0 16px;
       color: var(--text-muted);
       font-size: 0.92rem;
     }
@@ -933,23 +1063,23 @@
     .facts-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 20px;
+      gap: 18px;
     }
 
     .fact-card {
-      padding: 28px 22px;
+      padding: 26px 18px;
       text-align: center;
     }
 
     .fact-emoji {
-      font-size: 2.1rem;
+      font-size: 2rem;
       margin-bottom: 10px;
       display: block;
     }
 
     .fact-label {
       display: block;
-      font-size: 0.78rem;
+      font-size: 0.76rem;
       font-weight: 800;
       text-transform: uppercase;
       letter-spacing: 0.1em;
@@ -958,7 +1088,7 @@
     }
 
     .fact-value {
-      font-size: 1.12rem;
+      font-size: 1.06rem;
       font-weight: 800;
       color: var(--ivory);
       line-height: 1.35;
@@ -970,24 +1100,25 @@
     .register-grid {
       display: grid;
       grid-template-columns: 0.85fr 1.15fr;
-      gap: 40px;
+      gap: clamp(26px, 4vw, 40px);
       align-items: start;
     }
 
     .register-info h2 {
-      font-size: clamp(2rem, 3.8vw, 2.75rem);
-      line-height: 1.12;
-      margin: 14px 0 16px;
+      font-size: clamp(1.75rem, 3.8vw, 2.75rem);
+      line-height: 1.14;
+      margin: 14px 0 14px;
       color: var(--ivory);
     }
 
     .register-info p {
       color: var(--text-muted);
-      margin: 0 0 24px;
+      margin: 0 0 22px;
+      font-size: clamp(0.95rem, 2.2vw, 1rem);
     }
 
     .info-panel {
-      padding: 24px;
+      padding: 22px;
       display: flex;
       flex-direction: column;
       gap: 16px;
@@ -996,7 +1127,7 @@
     .info-row {
       display: flex;
       align-items: flex-start;
-      gap: 14px;
+      gap: 13px;
     }
 
     .info-icon {
@@ -1013,7 +1144,7 @@
 
     .info-row small {
       display: block;
-      font-size: 0.74rem;
+      font-size: 0.72rem;
       font-weight: 800;
       text-transform: uppercase;
       letter-spacing: 0.08em;
@@ -1024,6 +1155,7 @@
       color: var(--ivory);
       font-weight: 700;
       text-decoration: none;
+      font-size: 0.96rem;
     }
 
     .info-row a:hover {
@@ -1032,7 +1164,7 @@
 
     /* Registration Form */
     .reg-form {
-      padding: 32px;
+      padding: clamp(22px, 3.5vw, 32px);
       background: var(--glass-bg-strong);
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
@@ -1044,7 +1176,7 @@
     .form-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 18px;
+      gap: 16px;
     }
 
     .field {
@@ -1057,7 +1189,7 @@
     }
 
     .field label {
-      font-size: 0.86rem;
+      font-size: 0.88rem;
       font-weight: 700;
       color: var(--ivory);
       margin-bottom: 7px;
@@ -1071,13 +1203,15 @@
     .field select,
     .field textarea {
       width: 100%;
-      padding: 13px 15px;
+      min-height: 48px;
+      padding: 12px 15px;
       border-radius: 12px;
-      border: 1.5px solid rgba(255, 255, 255, 0.16);
-      background: rgba(6, 13, 31, 0.65);
+      border: 1.5px solid rgba(255, 255, 255, 0.18);
+      background: rgba(6, 13, 31, 0.72);
       color: var(--ivory);
       font-family: inherit;
-      font-size: 0.96rem;
+      font-size: 16px; /* Prevents iOS Safari auto-zoom on focus */
+      line-height: 1.4;
       transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
     }
 
@@ -1096,23 +1230,24 @@
     .field textarea:focus {
       outline: none;
       border-color: var(--gold);
-      background: rgba(6, 13, 31, 0.88);
-      box-shadow: 0 0 0 3px rgba(250, 204, 21, 0.18);
+      background: rgba(6, 13, 31, 0.92);
+      box-shadow: 0 0 0 3px rgba(250, 204, 21, 0.2);
     }
 
     .field textarea {
-      min-height: 92px;
+      min-height: 96px;
       resize: vertical;
     }
 
     .form-submit-wrap {
-      margin-top: 22px;
+      margin-top: 20px;
     }
 
     .form-submit-wrap .btn {
       width: 100%;
-      padding: 15px 24px;
-      font-size: 1.02rem;
+      min-height: 52px;
+      padding: 14px 22px;
+      font-size: 1rem;
     }
 
     .form-note {
@@ -1125,10 +1260,10 @@
     .confirm-card {
       display: none;
       margin-top: 20px;
-      padding: 18px 20px;
+      padding: 18px 18px;
       border-radius: 16px;
       background: rgba(22, 163, 74, 0.18);
-      border: 1px solid rgba(74, 222, 128, 0.42);
+      border: 1px solid rgba(74, 222, 128, 0.44);
       color: #dcfce7;
     }
 
@@ -1153,14 +1288,15 @@
       margin: 0 0 14px;
       padding: 12px 14px;
       border-radius: 12px;
-      background: rgba(6, 13, 31, 0.65);
+      background: rgba(6, 13, 31, 0.72);
       border: 1px solid rgba(74, 222, 128, 0.25);
       color: #e2e8f0;
       font-family: inherit;
-      font-size: 0.82rem;
+      font-size: 0.84rem;
       line-height: 1.5;
       white-space: pre-wrap;
       word-break: break-word;
+      overflow-x: auto;
     }
 
     @keyframes fadeSlideUp {
@@ -1176,7 +1312,7 @@
       margin: 0 auto;
       display: flex;
       flex-direction: column;
-      gap: 14px;
+      gap: 12px;
     }
 
     .faq-item {
@@ -1195,19 +1331,20 @@
 
     .faq-trigger {
       width: 100%;
+      min-height: 56px;
       background: transparent;
       border: 0;
-      padding: 20px 24px;
+      padding: 18px 22px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 16px;
+      gap: 14px;
       color: var(--ivory);
       font-family: inherit;
-      font-size: 1.04rem;
+      font-size: clamp(0.95rem, 2.5vw, 1.04rem);
       font-weight: 700;
       text-align: left;
-      cursor: pointer;
+      line-height: 1.38;
     }
 
     .faq-chevron {
@@ -1238,9 +1375,9 @@
 
     .faq-body-inner p {
       margin: 0;
-      padding: 0 24px 22px;
+      padding: 0 22px 20px;
       color: var(--text-muted);
-      font-size: 0.95rem;
+      font-size: 0.94rem;
       line-height: 1.65;
     }
 
@@ -1250,39 +1387,40 @@
     .contact-box {
       max-width: 820px;
       margin: 0 auto;
-      padding: 48px 32px;
+      padding: clamp(30px, 5vw, 48px) clamp(20px, 4vw, 32px);
       text-align: center;
-      background: linear-gradient(135deg, rgba(37, 99, 235, 0.24), rgba(14, 28, 63, 0.72));
+      background: linear-gradient(135deg, rgba(37, 99, 235, 0.24), rgba(14, 28, 63, 0.74));
       backdrop-filter: blur(18px);
       -webkit-backdrop-filter: blur(18px);
       border: 1px solid var(--glass-border-gold);
-      border-radius: 28px;
+      border-radius: 26px;
       box-shadow: 0 24px 60px rgba(2, 6, 23, 0.45);
     }
 
     .contact-box h2 {
       margin: 0 0 10px;
-      font-size: clamp(1.9rem, 3.8vw, 2.6rem);
+      font-size: clamp(1.7rem, 3.8vw, 2.6rem);
       color: var(--ivory);
     }
 
     .contact-box p {
-      margin: 0 auto 28px;
+      margin: 0 auto 24px;
       max-width: 560px;
       color: var(--text-muted);
+      font-size: clamp(0.95rem, 2.2vw, 1.02rem);
     }
 
     .contact-actions {
       display: flex;
       justify-content: center;
       flex-wrap: wrap;
-      gap: 14px;
+      gap: 12px;
     }
 
     footer {
       text-align: center;
-      padding: 32px 20px 84px;
-      background: rgba(5, 10, 24, 0.78);
+      padding: 32px 20px calc(92px + env(safe-area-inset-bottom, 0px));
+      background: rgba(5, 10, 24, 0.8);
       backdrop-filter: blur(12px);
       border-top: 1px solid rgba(255, 255, 255, 0.08);
       color: var(--text-muted);
@@ -1305,31 +1443,31 @@
        ========================================================= */
     .wallpaper-control {
       position: fixed;
-      bottom: 20px;
-      right: 20px;
+      bottom: calc(18px + env(safe-area-inset-bottom, 0px));
+      right: calc(18px + env(safe-area-inset-right, 0px));
       z-index: 70;
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      padding: 10px 16px;
+      min-height: 40px;
+      padding: 9px 15px;
       border-radius: var(--radius-pill);
-      border: 1px solid rgba(250, 204, 21, 0.38);
-      background: rgba(8, 16, 38, 0.82);
+      border: 1px solid rgba(250, 204, 21, 0.4);
+      background: rgba(8, 16, 38, 0.86);
       backdrop-filter: blur(14px);
       -webkit-backdrop-filter: blur(14px);
       color: var(--ivory);
       font-family: inherit;
       font-size: 0.8rem;
       font-weight: 700;
-      cursor: pointer;
-      box-shadow: 0 12px 30px rgba(2, 6, 23, 0.55);
+      box-shadow: 0 12px 30px rgba(2, 6, 23, 0.58);
       transition: transform 0.2s ease, border-color 0.2s ease, background 0.2s ease;
     }
 
     .wallpaper-control:hover {
       transform: translateY(-2px);
       border-color: var(--gold);
-      background: rgba(14, 28, 63, 0.92);
+      background: rgba(14, 28, 63, 0.94);
     }
 
     .wp-status-dot {
@@ -1338,6 +1476,7 @@
       border-radius: 50%;
       background: #4ade80;
       box-shadow: 0 0 8px #4ade80;
+      flex-shrink: 0;
     }
 
     .wallpaper-control.paused .wp-status-dot {
@@ -1350,8 +1489,8 @@
        ========================================================= */
     .reveal {
       opacity: 0;
-      transform: translateY(26px);
-      transition: opacity 0.65s cubic-bezier(0.22, 1, 0.36, 1), transform 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+      transform: translateY(22px);
+      transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1), transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
     }
 
     .reveal.visible {
@@ -1360,9 +1499,9 @@
     }
 
     /* =========================================================
-       RESPONSIVE BREAKPOINTS
+       RESPONSIVE BREAKPOINTS (1024px -> 768px -> 720px -> 480px -> 380px -> 360px)
        ========================================================= */
-    @media (max-width: 960px) {
+    @media (max-width: 1024px) {
       .hero-grid,
       .register-grid {
         grid-template-columns: 1fr;
@@ -1370,7 +1509,6 @@
 
       .hero {
         text-align: center;
-        padding-top: 44px;
       }
 
       .hero-copy,
@@ -1384,7 +1522,7 @@
       }
 
       .cards-3 {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(2, 1fr);
       }
 
       .facts-grid {
@@ -1401,31 +1539,151 @@
         display: inline-flex;
       }
 
-      .hero-stats {
-        grid-template-columns: repeat(2, 1fr);
+      .cards-3 {
+        grid-template-columns: 1fr;
+        gap: 16px;
       }
 
+      .hero-stats {
+        grid-template-columns: repeat(2, 1fr);
+        max-width: 440px;
+      }
+
+      .board-stage {
+        max-width: min(340px, 100%);
+      }
+
+      .walnut-frame {
+        padding: 12px;
+        border-radius: 20px;
+      }
+
+      .board-controls {
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+
+      .mini-btn {
+        min-height: 40px;
+        min-width: 40px;
+        padding: 8px 13px;
+        font-size: 0.8rem;
+      }
+
+      .wallpaper-control {
+        bottom: calc(12px + env(safe-area-inset-bottom, 0px));
+        right: calc(12px + env(safe-area-inset-right, 0px));
+        padding: 8px 13px;
+        font-size: 0.75rem;
+      }
+
+      footer {
+        padding-bottom: calc(88px + env(safe-area-inset-bottom, 0px));
+      }
+    }
+
+    @media (max-width: 720px) {
       .form-grid {
         grid-template-columns: 1fr;
+        gap: 14px;
       }
 
       .field.full {
         grid-column: auto;
       }
+    }
 
+    @media (max-width: 480px) {
+      .container {
+        padding: 0 16px;
+      }
+
+      .hero-actions {
+        flex-direction: column;
+        align-items: stretch;
+        max-width: 360px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .hero-actions .btn,
+      .contact-actions .btn,
+      #waFallbackBtn {
+        width: 100%;
+      }
+
+      .contact-actions {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .board-controls {
+        flex-direction: column;
+        align-items: stretch;
+      }
+
+      .move-ticker {
+        justify-content: center;
+      }
+
+      .board-btns {
+        width: 100%;
+        justify-content: center;
+      }
+
+      .board-btns .mini-btn {
+        flex: 1;
+        min-height: 42px;
+      }
+
+      .faq-trigger {
+        padding: 16px 16px;
+      }
+
+      .faq-body-inner p {
+        padding: 0 16px 18px;
+      }
+
+      .info-panel,
       .reg-form {
-        padding: 24px 20px;
+        padding: 20px 16px;
+      }
+    }
+
+    @media (max-width: 380px) {
+      .facts-grid {
+        grid-template-columns: 1fr;
+        gap: 14px;
       }
 
-      .section {
-        padding: 64px 0;
+      .fact-card {
+        padding: 20px 16px;
+      }
+    }
+
+    @media (max-width: 360px) {
+      .brand-icon {
+        width: 36px;
+        height: 36px;
+        font-size: 1.15rem;
+        border-radius: 10px;
       }
 
-      .wallpaper-control {
-        bottom: 14px;
-        right: 14px;
-        padding: 9px 13px;
-        font-size: 0.76rem;
+      .brand-sub {
+        font-size: 0.62rem;
+        letter-spacing: 0.08em;
+      }
+
+      .hero-stats {
+        gap: 8px;
+      }
+
+      .stat-pill {
+        padding: 9px 10px;
+      }
+
+      .stat-pill strong {
+        font-size: 0.86rem;
       }
     }
 
@@ -1458,11 +1716,14 @@
   <!-- TOP SCROLL PROGRESS INDICATOR -->
   <div id="scroll-progress" aria-hidden="true"></div>
 
+  <!-- MOBILE DRAWER BACKDROP (TAP OUTSIDE TO CLOSE) -->
+  <div id="drawerBackdrop" class="drawer-backdrop" aria-hidden="true"></div>
+
   <!-- FOREGROUND CONTENT SHELL -->
   <div class="page-shell">
 
     <!-- STICKY FROSTED-GLASS NAVBAR -->
-    <nav class="navbar" id="navbar">
+    <nav class="navbar" id="navbar" aria-label="Main navigation">
       <div class="nav-inner">
         <a href="#" class="brand">
           <span class="brand-icon" aria-hidden="true">♟</span>
@@ -1472,6 +1733,7 @@
           </span>
         </a>
 
+        <!-- Desktop Navigation (Exact Order: About -> Classes -> Register -> FAQ -> Contact) -->
         <div class="nav-links">
           <a href="#about">About</a>
           <a href="#classes">Classes</a>
@@ -1480,6 +1742,7 @@
           <a href="#contact" class="btn-nav">Contact</a>
         </div>
 
+        <!-- Accessible 44x44px Animated Hamburger Button -->
         <button
           id="menuToggle"
           class="menu-toggle"
@@ -1488,24 +1751,20 @@
           aria-expanded="false"
           aria-controls="mobileDrawer"
         >
-          <svg id="iconOpen" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
-          </svg>
-          <svg id="iconClose" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24" style="display:none;">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-          </svg>
+          <span class="bar" aria-hidden="true"></span>
+          <span class="bar" aria-hidden="true"></span>
+          <span class="bar" aria-hidden="true"></span>
         </button>
       </div>
 
-      <!-- Responsive Mobile Drawer -->
-      <div id="mobileDrawer" class="mobile-drawer">
-        <a href="#about" class="drawer-link">About</a>
-        <a href="#classes" class="drawer-link">Classes</a>
-        <a href="#register" class="drawer-link">Register</a>
-        <a href="#faq" class="drawer-link">FAQ</a>
-        <div class="mobile-drawer-actions">
-          <a href="#contact" class="btn btn-primary drawer-link" style="padding:11px 14px; font-size:0.9rem;">Contact</a>
-          <a href="tel:+919480240742" class="btn btn-gold" style="padding:11px 14px; font-size:0.9rem;">📞 Call Coach</a>
+      <!-- Smooth Full-Width Mobile Drawer (Exact Order: About -> Classes -> Register -> FAQ -> Contact) -->
+      <div id="mobileDrawer" class="mobile-drawer" aria-hidden="true">
+        <div class="mobile-drawer-inner">
+          <a href="#about" class="drawer-link">About</a>
+          <a href="#classes" class="drawer-link">Classes</a>
+          <a href="#register" class="drawer-link">Register</a>
+          <a href="#faq" class="drawer-link">FAQ</a>
+          <a href="#contact" class="drawer-link drawer-cta">Contact Coach →</a>
         </div>
       </div>
     </nav>
@@ -1569,7 +1828,7 @@
                   <span id="boardToggleText">Pause</span>
                 </button>
                 <button id="boardReplayBtn" class="mini-btn" type="button" aria-label="Replay Italian Game opening" title="Replay">
-                  ↺
+                  ↺ Replay
                 </button>
               </div>
             </div>
@@ -1578,7 +1837,7 @@
       </div>
     </header>
 
-    <!-- WHY LEARN CHESS SECTION -->
+    <!-- ABOUT SECTION: WHY LEARN CHESS + 3-STAGE LEARNING PATH -->
     <section id="about" class="section section-band">
       <div class="container">
         <div class="section-header reveal">
@@ -1596,29 +1855,25 @@
             <p>Practice deep concentration and careful board observation while learning to plan every move without rushing.</p>
           </article>
 
-          <article class="glass-card feature-card reveal" style="transition-delay: 140ms;">
+          <article class="glass-card feature-card reveal" style="transition-delay: 130ms;">
             <div class="feature-icon gold">💡</div>
             <h3>Smart Thinking</h3>
             <p>Develop logical thinking, pattern recognition, problem-solving, and confident decision-making skills that help in academics too.</p>
           </article>
 
-          <article class="glass-card feature-card reveal" style="transition-delay: 220ms;">
+          <article class="glass-card feature-card reveal" style="transition-delay: 200ms;">
             <div class="feature-icon">🏆</div>
             <h3>Build Confidence</h3>
             <p>Learn from wins and mistakes in a friendly, encouraging home environment while steadily improving game after game.</p>
           </article>
         </div>
-      </div>
-    </section>
 
-    <!-- LEARNING PATH (3-STAGE PROGRESSION) -->
-    <section id="curriculum" class="section">
-      <div class="container">
-        <div class="section-header reveal">
-          <span class="pill-tag gold">♟️ Learning Path</span>
-          <h2 class="section-title">Structured 3-Stage Progression</h2>
+        <!-- 3-STAGE LEARNING PATH -->
+        <div class="subsection-head reveal">
+          <span class="pill-tag gold">♟️ 3-Stage Learning Path</span>
+          <h2 class="section-title">Step-by-Step Chess Progression</h2>
           <p class="section-sub">
-            Every learner progresses step by step—from their very first move to complete, confident tournament-ready play.
+            Every learner progresses at a comfortable pace—from first moves to confident tactical and strategic play.
           </p>
         </div>
 
@@ -1626,42 +1881,42 @@
           <article class="glass-card stage-card reveal" style="transition-delay: 60ms;">
             <div class="stage-top">
               <span class="stage-num">01</span>
-              <span class="stage-badge">Stage 1</span>
+              <span class="stage-badge">Beginner</span>
             </div>
-            <h3>Foundations &amp; Rules</h3>
-            <p class="stage-desc">Ideal for complete beginners building strong chess habits from day one.</p>
+            <h3>Beginner</h3>
+            <p class="stage-desc">Ideal for first-time players building strong chess habits from day one.</p>
             <ul class="stage-list">
               <li>Board setup, piece values, and legal movements</li>
               <li>Special rules: castling, pawn promotion &amp; en passant</li>
-              <li>Check, checkmate, stalemate, and opening golden rules</li>
+              <li>Check, checkmate, stalemate, and safe piece play</li>
             </ul>
           </article>
 
-          <article class="glass-card stage-card reveal" style="transition-delay: 140ms;">
+          <article class="glass-card stage-card reveal" style="transition-delay: 130ms;">
             <div class="stage-top">
               <span class="stage-num gold">02</span>
-              <span class="stage-badge">Stage 2</span>
+              <span class="stage-badge">Foundation</span>
             </div>
-            <h3>Tactics &amp; Patterns</h3>
-            <p class="stage-desc">Sharpen calculation and learn to spot winning combinations quickly.</p>
+            <h3>Foundation</h3>
+            <p class="stage-desc">Develop solid opening principles and reliable checkmate patterns.</p>
             <ul class="stage-list">
-              <li>Forks, pins, skewers, and discovered attacks</li>
-              <li>Essential checkmate patterns (Queen, Rook &amp; back-rank)</li>
-              <li>Blunder checks and guided tactical puzzle drills</li>
+              <li>Center control, rapid development, and king safety</li>
+              <li>Essential checkmates (Queen, Rook &amp; back-rank)</li>
+              <li>Blunder checks and guided move-by-move review</li>
             </ul>
           </article>
 
-          <article class="glass-card stage-card reveal" style="transition-delay: 220ms;">
+          <article class="glass-card stage-card reveal" style="transition-delay: 200ms;">
             <div class="stage-top">
               <span class="stage-num">03</span>
-              <span class="stage-badge">Stage 3</span>
+              <span class="stage-badge">Intermediate / Tactical</span>
             </div>
-            <h3>Strategy &amp; Match Play</h3>
-            <p class="stage-desc">Put everything together in thoughtful, complete practice games.</p>
+            <h3>Intermediate / Tactical</h3>
+            <p class="stage-desc">Sharpen calculation and play complete, confident practice games.</p>
             <ul class="stage-list">
-              <li>Middlegame planning, center control &amp; pawn structures</li>
-              <li>Practical endgame technique and active king play</li>
-              <li>Friendly practice matches with post-game coach review</li>
+              <li>Forks, pins, skewers, and discovered attacks</li>
+              <li>Middlegame planning, pawn structures &amp; endgames</li>
+              <li>Friendly practice matches with post-game coach feedback</li>
             </ul>
           </article>
         </div>
@@ -1669,7 +1924,7 @@
     </section>
 
     <!-- CLASS DETAILS SECTION -->
-    <section id="classes" class="section section-band">
+    <section id="classes" class="section">
       <div class="container">
         <div class="section-header reveal">
           <span class="pill-tag">📋 Batch Information</span>
@@ -1683,22 +1938,22 @@
           <div class="glass-card fact-card reveal" style="transition-delay: 50ms;">
             <span class="fact-emoji">👩‍🏫</span>
             <span class="fact-label">Coach</span>
-            <div class="fact-value">Soni Singh</div>
+            <div class="fact-value">Coach Soni Singh</div>
           </div>
 
-          <div class="glass-card fact-card reveal" style="transition-delay: 110ms;">
+          <div class="glass-card fact-card reveal" style="transition-delay: 100ms;">
             <span class="fact-emoji">🧒</span>
             <span class="fact-label">Age Group</span>
             <div class="fact-value">5–20 years</div>
           </div>
 
-          <div class="glass-card fact-card reveal" style="transition-delay: 170ms;">
+          <div class="glass-card fact-card reveal" style="transition-delay: 150ms;">
             <span class="fact-emoji">🕒</span>
             <span class="fact-label">Timings</span>
             <div class="fact-value">Afternoon 3:00 PM to 6:00 PM<br /><small style="font-weight:600; color:#cbd5e1;">(Monday to Thursday)</small></div>
           </div>
 
-          <div class="glass-card fact-card reveal" style="transition-delay: 230ms;">
+          <div class="glass-card fact-card reveal" style="transition-delay: 200ms;">
             <span class="fact-emoji">💰</span>
             <span class="fact-label">Fee</span>
             <div class="fact-value" style="color:var(--gold-soft);">₹700 / month</div>
@@ -1708,7 +1963,7 @@
     </section>
 
     <!-- ONLINE REGISTRATION SECTION -->
-    <section id="register" class="section">
+    <section id="register" class="section section-band">
       <div class="container">
         <div class="register-grid">
           <div class="register-info reveal">
@@ -1743,31 +1998,31 @@
             </div>
           </div>
 
-          <form id="regForm" class="reg-form reveal" style="transition-delay: 100ms;">
+          <form id="regForm" class="reg-form reveal" style="transition-delay: 80ms;">
             <div class="form-grid">
               <div class="field">
                 <label for="student">Student Name <span class="req">*</span></label>
-                <input id="student" name="student" type="text" required placeholder="Enter student's name" />
+                <input id="student" name="student" type="text" autocomplete="name" required placeholder="Enter student's name" />
               </div>
 
               <div class="field">
-                <label for="age">Age <span class="req">*</span></label>
-                <input id="age" name="age" type="number" min="5" max="20" required placeholder="5–20" />
+                <label for="age">Age (5–20) <span class="req">*</span></label>
+                <input id="age" name="age" type="number" inputmode="numeric" min="5" max="20" required placeholder="5–20" />
               </div>
 
               <div class="field">
                 <label for="parent">Parent / Guardian Name <span class="req">*</span></label>
-                <input id="parent" name="parent" type="text" required placeholder="Enter parent name" />
+                <input id="parent" name="parent" type="text" autocomplete="name" required placeholder="Enter parent name" />
               </div>
 
               <div class="field">
                 <label for="phone">Phone Number <span class="req">*</span></label>
-                <input id="phone" name="phone" type="tel" required placeholder="10-digit number" />
+                <input id="phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" required placeholder="10-digit number" />
               </div>
 
               <div class="field full">
-                <label for="address">Address (House Number, township) <span class="req">*</span></label>
-                <input id="address" name="address" type="text" required placeholder="e.g. T4/12, Vidyanagar, JSW Township" />
+                <label for="address">Address (House Number, Township) <span class="req">*</span></label>
+                <input id="address" name="address" type="text" autocomplete="street-address" required placeholder="e.g. T4/12, Vidyanagar, JSW Township" />
               </div>
 
               <div class="field full">
@@ -1794,12 +2049,13 @@
               <button class="btn btn-whatsapp" type="submit">💬 Send Registration on WhatsApp →</button>
               <p class="form-note">Submitting opens WhatsApp with your registration details. You can review the message before sending it.</p>
             </div>
+
             <!-- Inline Confirmation Card with Prepared Message Preview & Direct Fallback Button -->
             <div id="confirmCard" class="confirm-card" role="status" aria-live="polite">
               <h4>✓ Registration Message Ready!</h4>
-              <p>WhatsApp has been opened with all of your student details (including your township address). If it didn't open automatically, tap the button below:</p>
+              <p>WhatsApp has been prepared with all of your student details (including your township address). If it didn't open automatically, tap the button below:</p>
               <pre id="confirmPreview" class="confirm-preview"></pre>
-              <a id="waFallbackBtn" href="https://wa.me/919480240742" target="_blank" rel="noopener" class="btn btn-whatsapp" style="padding:10px 18px; font-size:0.88rem;">
+              <a id="waFallbackBtn" href="https://wa.me/919480240742" target="_blank" rel="noopener" class="btn btn-whatsapp" style="min-height:46px; padding:11px 18px; font-size:0.9rem;">
                 Open WhatsApp Directly →
               </a>
             </div>
@@ -1809,7 +2065,7 @@
     </section>
 
     <!-- PARENT FAQ ACCORDION -->
-    <section id="faq" class="section section-band">
+    <section id="faq" class="section">
       <div class="container">
         <div class="section-header reveal">
           <span class="pill-tag">❓ Parent FAQ</span>
@@ -1820,48 +2076,48 @@
         <div class="faq-wrap">
           <div class="faq-item reveal" data-open="true">
             <button type="button" class="faq-trigger" aria-expanded="true">
-              <span>Do beginners need their own chess board?</span>
+              <span>Can complete beginners or young kids join right away?</span>
               <svg class="faq-chevron" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
             </button>
             <div class="faq-body">
               <div class="faq-body-inner">
-                <p>No! Chess boards and pieces are provided during class at T3/17, Vidyanagar. Having a standard board at home is great for practice, and Coach Soni Singh is happy to suggest a good beginner set if needed.</p>
+                <p>Yes! Learners from ages 5 to 20 are welcome even if they have never played chess before. Coach Soni Singh starts with friendly, hands-on basics and you can call or message on WhatsApp to check a suitable slot or introductory session.</p>
               </div>
             </div>
           </div>
 
           <div class="faq-item reveal" data-open="false">
             <button type="button" class="faq-trigger" aria-expanded="false">
-              <span>How are batches grouped by age and skill?</span>
+              <span>Do students need to bring their own chess board?</span>
               <svg class="faq-chevron" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
             </button>
             <div class="faq-body">
               <div class="faq-body-inner">
-                <p>Learners ages 5–20 are grouped into small, focused batches between 3:00 PM and 6:00 PM (Monday to Thursday) based on their current playing level and preferred timing so every child receives personal attention.</p>
+                <p>No! Chess boards and pieces are provided during class at T3/17, Vidyanagar, JSW Township. Having a standard board at home is helpful for practice, and Coach Soni Singh is happy to recommend a good beginner set if needed.</p>
               </div>
             </div>
           </div>
 
           <div class="faq-item reveal" data-open="false">
             <button type="button" class="faq-trigger" aria-expanded="false">
-              <span>What happens if a class is missed?</span>
+              <span>How do class timings and batches work?</span>
               <svg class="faq-chevron" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
             </button>
             <div class="faq-body">
               <div class="faq-body-inner">
-                <p>Just inform Coach Soni Singh in advance on WhatsApp or by phone. Key lessons and puzzles covered in the missed session are recapped during the student's next class so they never fall behind.</p>
+                <p>Classes run Monday to Thursday in the afternoon between 3:00 PM and 6:00 PM. Students are placed in small, focused batches matched to their experience level and preferred afternoon slot so every learner receives personal guidance.</p>
               </div>
             </div>
           </div>
 
           <div class="faq-item reveal" data-open="false">
             <button type="button" class="faq-trigger" aria-expanded="false">
-              <span>How do I confirm enrollment?</span>
+              <span>What is the monthly fee and how do I confirm enrollment?</span>
               <svg class="faq-chevron" fill="none" stroke="currentColor" stroke-width="2.4" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7"/></svg>
             </button>
             <div class="faq-body">
               <div class="faq-body-inner">
-                <p>Submit the Online Registration form above to send your child's details to Coach Soni Singh on WhatsApp. She will confirm your afternoon batch timing and share the simple steps for the ₹700/month enrollment.</p>
+                <p>The coaching fee is ₹700 / month. Simply submit the Online Registration form above to send your child's details to Coach Soni Singh on WhatsApp—she will confirm your afternoon batch timing and share the next steps.</p>
               </div>
             </div>
           </div>
@@ -1870,7 +2126,7 @@
     </section>
 
     <!-- CONTACT SECTION -->
-    <section id="contact" class="section">
+    <section id="contact" class="section section-band">
       <div class="container">
         <div class="contact-box reveal">
           <span class="pill-tag gold" style="margin-bottom:14px;">📞 Get in Touch</span>
@@ -1902,9 +2158,11 @@
       'use strict';
 
       const prefersReducedMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const isFinePointer = window.matchMedia && window.matchMedia('(hover: hover) and (pointer: fine)').matches;
 
       /* =========================================================
          1. FULL-PAGE INTERACTIVE CHESS LIVE WALLPAPER (CANVAS)
+            Optimized DPR cap & particle density on mobile screens
          ========================================================= */
       const canvas = document.getElementById('chess-wallpaper');
       const ctx = canvas.getContext('2d');
@@ -1913,7 +2171,8 @@
 
       let wpWidth = window.innerWidth;
       let wpHeight = window.innerHeight;
-      let dpr = Math.min(window.devicePixelRatio || 1, 2);
+      let isMobileViewport = wpWidth < 768;
+      let dpr = Math.min(window.devicePixelRatio || 1, isMobileViewport ? 1.5 : 2);
       let wpRunning = !prefersReducedMotion;
       let rafId = null;
 
@@ -1924,7 +2183,7 @@
 
       // Grid geometry constants
       const CELL = 76;
-      const GRID_ANGLE = -0.22; // ~ -12.6 deg angled perspective feel
+      const GRID_ANGLE = -0.22;
       const GRID_Y_SCALE = 0.78;
       const COS_A = Math.cos(GRID_ANGLE);
       const SIN_A = Math.sin(GRID_ANGLE);
@@ -1932,42 +2191,42 @@
       let driftX = 0;
       let driftY = 0;
 
-      // Floating translucent chess pieces (multi-layer parallax)
       const CHESS_GLYPHS = ['♔', '♕', '♖', '♗', '♘', '♙', '♚', '♛', '♜', '♝', '♞', '♟'];
       const floatingPieces = [];
       const bokehParticles = [];
-      const activeMoves = []; // Living chess moves (knight L-jumps, bishop diagonals, rook files)
-      const cellGlows = new Map(); // key "gx,gy" -> { alpha, color }
+      const activeMoves = [];
+      const cellGlows = new Map();
 
       function initWallpaperEntities() {
+        isMobileViewport = wpWidth < 768;
         floatingPieces.length = 0;
-        const pieceCount = wpWidth < 700 ? 11 : 18;
+        const pieceCount = isMobileViewport ? 8 : 18;
         for (let i = 0; i < pieceCount; i++) {
-          const depth = 0.3 + Math.random() * 0.75;
+          const depth = 0.32 + Math.random() * 0.72;
           floatingPieces.push({
             glyph: CHESS_GLYPHS[i % CHESS_GLYPHS.length],
             x: Math.random() * wpWidth,
             y: Math.random() * wpHeight,
-            vx: (Math.random() - 0.5) * 0.28 * depth,
-            vy: (-0.12 - Math.random() * 0.25) * depth,
-            size: (26 + Math.random() * 44) * depth,
+            vx: (Math.random() - 0.5) * 0.26 * depth,
+            vy: (-0.11 - Math.random() * 0.24) * depth,
+            size: (isMobileViewport ? 22 + Math.random() * 32 : 26 + Math.random() * 44) * depth,
             rot: (Math.random() - 0.5) * 0.5,
             vRot: (Math.random() - 0.5) * 0.004,
             depth,
             isGold: Math.random() > 0.45,
-            baseAlpha: 0.06 + depth * 0.08
+            baseAlpha: 0.055 + depth * 0.075
           });
         }
 
         bokehParticles.length = 0;
-        const bokehCount = wpWidth < 700 ? 18 : 34;
+        const bokehCount = isMobileViewport ? 14 : 34;
         for (let i = 0; i < bokehCount; i++) {
           bokehParticles.push({
             x: Math.random() * wpWidth,
             y: Math.random() * wpHeight,
-            r: 2 + Math.random() * 5.5,
-            vx: (Math.random() - 0.5) * 0.22,
-            vy: -0.1 - Math.random() * 0.28,
+            r: 2 + Math.random() * 5,
+            vx: (Math.random() - 0.5) * 0.2,
+            vy: -0.1 - Math.random() * 0.25,
             phase: Math.random() * Math.PI * 2,
             isGold: Math.random() > 0.42
           });
@@ -1975,21 +2234,26 @@
       }
 
       function resizeCanvas() {
-        wpWidth = window.innerWidth;
-        wpHeight = window.innerHeight;
-        dpr = Math.min(window.devicePixelRatio || 1, 2);
+        const nextW = window.innerWidth;
+        const nextH = window.innerHeight;
+        const widthChanged = Math.abs(nextW - wpWidth) > 2;
+        wpWidth = nextW;
+        wpHeight = nextH;
+        isMobileViewport = wpWidth < 768;
+        dpr = Math.min(window.devicePixelRatio || 1, isMobileViewport ? 1.5 : 2);
         canvas.width = Math.floor(wpWidth * dpr);
         canvas.height = Math.floor(wpHeight * dpr);
         canvas.style.width = wpWidth + 'px';
         canvas.style.height = wpHeight + 'px';
         ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-        initWallpaperEntities();
+        if (widthChanged || floatingPieces.length === 0) {
+          initWallpaperEntities();
+        }
         if (!wpRunning) {
           renderWallpaperFrame(performance.now());
         }
       }
 
-      // Convert screen coordinates -> angled board plane coordinates
       function screenToGrid(sx, sy, originX, originY) {
         const dx = sx - originX;
         const dy = (sy - originY) / GRID_Y_SCALE;
@@ -2001,7 +2265,6 @@
         };
       }
 
-      // Convert grid cell center -> screen coordinates
       function gridCenterToScreen(gx, gy, originX, originY) {
         const lx = (gx + 0.5) * CELL + driftX;
         const ly = (gy + 0.5) * CELL + driftY;
@@ -2017,13 +2280,12 @@
         cellGlows.set(key, { gx, gy, alpha: nextAlpha, isGold });
       }
 
-      // Spawn a realistic background chess move (Knight L-jump, Bishop diagonal, or Rook file/rank)
       function spawnLivingMove(originX, originY) {
-        if (activeMoves.length >= 4) return;
+        const maxMoves = isMobileViewport ? 2 : 4;
+        if (activeMoves.length >= maxMoves) return;
 
-        // Pick a random screen point inside the viewport and map to a visible grid cell
-        const rx = wpWidth * (0.12 + Math.random() * 0.76);
-        const ry = wpHeight * (0.12 + Math.random() * 0.76);
+        const rx = wpWidth * (0.14 + Math.random() * 0.72);
+        const ry = wpHeight * (0.14 + Math.random() * 0.72);
         const start = screenToGrid(rx, ry, originX, originY);
 
         const moveTypes = ['knight', 'bishop', 'rook'];
@@ -2069,17 +2331,16 @@
       let lastMoveSpawn = 0;
 
       function renderWallpaperFrame(now) {
-        // Smoothly interpolate pointer & scroll parallax
         pointer.x += (pointer.tx - pointer.x) * 0.07;
         pointer.y += (pointer.ty - pointer.y) * 0.07;
         smoothScrollY += (scrollY - smoothScrollY) * 0.08;
 
-        const normMX = (pointer.x / Math.max(wpWidth, 1) - 0.5);
-        const normMY = (pointer.y / Math.max(wpHeight, 1) - 0.5);
+        const normMX = isFinePointer ? (pointer.x / Math.max(wpWidth, 1) - 0.5) : 0;
+        const normMY = isFinePointer ? (pointer.y / Math.max(wpHeight, 1) - 0.5) : 0;
 
         if (wpRunning) {
-          driftX += 0.22;
-          driftY += 0.14;
+          driftX += 0.2;
+          driftY += 0.13;
         }
 
         // 1. Deep Royal Navy Atmospheric Base Gradient
@@ -2097,7 +2358,6 @@
         ctx.fillStyle = bgGrad;
         ctx.fillRect(0, 0, wpWidth, wpHeight);
 
-        // Ambient golden & royal-blue nebula glows
         const goldAura = ctx.createRadialGradient(
           wpWidth * 0.82 - normMX * 40,
           wpHeight * 0.18 - normMY * 30,
@@ -2126,10 +2386,9 @@
 
         // 2. Angled Infinite Perspective Chessboard Grid
         const originX = wpWidth * 0.5 - normMX * 32;
-        const originY = wpHeight * 0.5 - normMY * 24 - (smoothScrollY * 0.18);
+        const originY = wpHeight * 0.5 - normMY * 24 - (smoothScrollY * 0.16);
 
-        // Illuminate square under cursor
-        if (pointer.active) {
+        if (isFinePointer && pointer.active) {
           const hovered = screenToGrid(pointer.x, pointer.y, originX, originY);
           addCellGlow(hovered.gx, hovered.gy, 0.34, true);
           addCellGlow(hovered.gx + 1, hovered.gy, 0.12, false);
@@ -2138,8 +2397,8 @@
           addCellGlow(hovered.gx, hovered.gy - 1, 0.12, false);
         }
 
-        // Spawn periodic living chess moves
-        if (wpRunning && now - lastMoveSpawn > 1350) {
+        const spawnInterval = isMobileViewport ? 1850 : 1350;
+        if (wpRunning && now - lastMoveSpawn > spawnInterval) {
           spawnLivingMove(originX, originY);
           lastMoveSpawn = now;
         }
@@ -2149,27 +2408,22 @@
         ctx.scale(1, GRID_Y_SCALE);
         ctx.rotate(GRID_ANGLE);
 
-        // Calculate visible bounds in rotated local board space
         const diag = Math.hypot(wpWidth, wpHeight / GRID_Y_SCALE) * 0.72;
         const minGX = Math.floor((-diag - driftX) / CELL) - 1;
         const maxGX = Math.ceil((diag - driftX) / CELL) + 1;
         const minGY = Math.floor((-diag - driftY) / CELL) - 1;
         const maxGY = Math.ceil((diag - driftY) / CELL) + 1;
 
-        // Draw subtle alternating chessboard squares & fine grid lines
         for (let gy = minGY; gy <= maxGY; gy++) {
           for (let gx = minGX; gx <= maxGX; gx++) {
             const x = gx * CELL + driftX;
             const y = gy * CELL + driftY;
             const isLight = ((gx + gy) & 1) === 0;
 
-            if (isLight) {
-              ctx.fillStyle = 'rgba(59, 130, 246, 0.048)';
-              ctx.fillRect(x, y, CELL, CELL);
-            } else {
-              ctx.fillStyle = 'rgba(250, 204, 21, 0.018)';
-              ctx.fillRect(x, y, CELL, CELL);
-            }
+            ctx.fillStyle = isLight
+              ? 'rgba(59, 130, 246, 0.048)'
+              : 'rgba(250, 204, 21, 0.018)';
+            ctx.fillRect(x, y, CELL, CELL);
 
             ctx.strokeStyle = 'rgba(148, 163, 184, 0.065)';
             ctx.lineWidth = 1;
@@ -2177,7 +2431,6 @@
           }
         }
 
-        // Draw softly illuminated squares (from mouse hover & living chess moves)
         cellGlows.forEach((g, key) => {
           const x = g.gx * CELL + driftX;
           const y = g.gy * CELL + driftY;
@@ -2200,19 +2453,18 @@
 
         ctx.restore();
 
-        // 3. Draw Glowing Curved Light Trails for Living Chess Moves
+        // 3. Glowing Curved Light Trails for Living Chess Moves
         for (let i = activeMoves.length - 1; i >= 0; i--) {
           const mv = activeMoves[i];
           const p0 = gridCenterToScreen(mv.fromGX, mv.fromGY, originX, originY);
           const p1 = gridCenterToScreen(mv.toGX, mv.toGY, originX, originY);
 
-          // Control point for elegant curved arc (higher arc for Knight L-jumps)
-          const arcLift = mv.type === 'knight' ? 68 : 24;
+          const arcLift = mv.type === 'knight' ? 62 : 22;
           const cx = (p0.x + p1.x) * 0.5;
           const cy = (p0.y + p1.y) * 0.5 - arcLift;
 
           const prog = Math.min(1, mv.t);
-          const steps = 20;
+          const steps = isMobileViewport ? 14 : 20;
 
           ctx.save();
           ctx.beginPath();
@@ -2228,18 +2480,19 @@
           ctx.strokeStyle = mv.isGold
             ? `rgba(250, 204, 21, ${(0.52 * mv.fade).toFixed(3)})`
             : `rgba(96, 165, 250, ${(0.56 * mv.fade).toFixed(3)})`;
-          ctx.lineWidth = mv.type === 'knight' ? 2.6 : 2.1;
-          ctx.shadowBlur = 14;
-          ctx.shadowColor = mv.isGold ? 'rgba(250, 204, 21, 0.7)' : 'rgba(59, 130, 246, 0.8)';
+          ctx.lineWidth = mv.type === 'knight' ? 2.5 : 2;
+          if (!isMobileViewport) {
+            ctx.shadowBlur = 14;
+            ctx.shadowColor = mv.isGold ? 'rgba(250, 204, 21, 0.7)' : 'rgba(59, 130, 246, 0.8)';
+          }
           ctx.stroke();
 
-          // Glowing moving comet head along curve
           if (prog < 1) {
             const inv = 1 - prog;
             const hx = inv * inv * p0.x + 2 * inv * prog * cx + prog * prog * p1.x;
             const hy = inv * inv * p0.y + 2 * inv * prog * cy + prog * prog * p1.y;
             ctx.beginPath();
-            ctx.arc(hx, hy, 4.2, 0, Math.PI * 2);
+            ctx.arc(hx, hy, 4, 0, Math.PI * 2);
             ctx.fillStyle = mv.isGold ? '#fef08a' : '#bfdbfe';
             ctx.fill();
           }
@@ -2328,15 +2581,17 @@
         }
       });
 
-      window.addEventListener('mousemove', (e) => {
-        pointer.tx = e.clientX;
-        pointer.ty = e.clientY;
-        pointer.active = true;
-      }, { passive: true });
+      if (isFinePointer) {
+        window.addEventListener('mousemove', (e) => {
+          pointer.tx = e.clientX;
+          pointer.ty = e.clientY;
+          pointer.active = true;
+        }, { passive: true });
 
-      window.addEventListener('mouseleave', () => {
-        pointer.active = false;
-      });
+        window.addEventListener('mouseleave', () => {
+          pointer.active = false;
+        });
+      }
 
       window.addEventListener('resize', resizeCanvas);
 
@@ -2357,26 +2612,40 @@
       handleScroll();
 
       /* =========================================================
-         3. MOBILE HAMBURGER NAVIGATION
+         3. MOBILE HAMBURGER NAVIGATION (BACKDROP + ESCAPE CLOSE)
          ========================================================= */
       const menuToggle = document.getElementById('menuToggle');
       const mobileDrawer = document.getElementById('mobileDrawer');
-      const iconOpen = document.getElementById('iconOpen');
-      const iconClose = document.getElementById('iconClose');
+      const drawerBackdrop = document.getElementById('drawerBackdrop');
 
       function setDrawer(open) {
         mobileDrawer.classList.toggle('open', open);
-        iconOpen.style.display = open ? 'none' : 'block';
-        iconClose.style.display = open ? 'block' : 'none';
+        drawerBackdrop.classList.toggle('open', open);
         menuToggle.setAttribute('aria-expanded', String(open));
+        mobileDrawer.setAttribute('aria-hidden', String(!open));
       }
 
       menuToggle.addEventListener('click', () => {
         setDrawer(!mobileDrawer.classList.contains('open'));
       });
 
+      drawerBackdrop.addEventListener('click', () => setDrawer(false));
+
       document.querySelectorAll('.drawer-link').forEach((link) => {
         link.addEventListener('click', () => setDrawer(false));
+      });
+
+      window.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && mobileDrawer.classList.contains('open')) {
+          setDrawer(false);
+          menuToggle.focus();
+        }
+      });
+
+      window.addEventListener('resize', () => {
+        if (window.innerWidth > 768 && mobileDrawer.classList.contains('open')) {
+          setDrawer(false);
+        }
       });
 
       /* =========================================================
@@ -2393,7 +2662,7 @@
               }
             });
           },
-          { threshold: 0.12, rootMargin: '0px 0px -30px 0px' }
+          { threshold: 0.1, rootMargin: '0px 0px -24px 0px' }
         );
         revealNodes.forEach((el) => io.observe(el));
       } else {
@@ -2401,7 +2670,7 @@
       }
 
       /* =========================================================
-         5. INTERACTIVE 3D WALNUT CHESSBOARD (ITALIAN GAME)
+         5. INTERACTIVE 3D WALNUT CHESSBOARD (ITALIAN GAME -> 8. Nbxd2)
          ========================================================= */
       const walnutFrame = document.getElementById('walnutFrame');
       const boardSquaresEl = document.getElementById('boardSquares');
@@ -2414,8 +2683,8 @@
       const boardToggleText = document.getElementById('boardToggleText');
       const boardReplayBtn = document.getElementById('boardReplayBtn');
 
-      // 3D Mouse Tilt on Desktop
-      if (!prefersReducedMotion && walnutFrame) {
+      // 3D Mouse Tilt strictly enabled on desktop fine-pointer devices
+      if (isFinePointer && !prefersReducedMotion && walnutFrame) {
         const stage = walnutFrame.parentElement;
         stage.addEventListener('mousemove', (e) => {
           const rect = stage.getBoundingClientRect();
@@ -2428,7 +2697,6 @@
         });
       }
 
-      // Crisp Staunton SVG Chess Pieces
       function createPieceSVG(type, color) {
         const isWhite = color === 'w';
         const fill = isWhite ? '#fffdf7' : '#172554';
@@ -2630,7 +2898,7 @@
       });
 
       /* =========================================================
-         7. REGISTRATION FORM -> WHATSAPP HANDLER (WITH ADDRESS)
+         7. REGISTRATION FORM -> WHATSAPP HANDLER (INCLUDES ADDRESS)
          ========================================================= */
       const regForm = document.getElementById('regForm');
       const confirmCard = document.getElementById('confirmCard');
@@ -2665,9 +2933,8 @@
       });
 
       /* =========================================================
-         8. CUSTOM CHESS QUEEN CURSOR AURA & CLICK SPARKLE RIPPLES
+         8. CUSTOM CHESS QUEEN CURSOR AURA & CLICK SPARKLES (DESKTOP ONLY)
          ========================================================= */
-      const isFinePointer = window.matchMedia && window.matchMedia('(hover: hover) and (pointer: fine)').matches;
       const queenAuraEl = document.getElementById('queen-cursor-aura');
       const queenRippleLayer = document.getElementById('queen-ripple-layer');
 
@@ -2715,7 +2982,6 @@
           if (e.pointerType && e.pointerType !== 'mouse' && e.pointerType !== 'pen') return;
           queenAuraEl.classList.add('pressed');
 
-          // Expanding gold-blue ripple ring at the crown tip
           const ripple = document.createElement('span');
           ripple.className = 'queen-ripple';
           ripple.style.left = e.clientX + 'px';
@@ -2723,7 +2989,6 @@
           queenRippleLayer.appendChild(ripple);
           setTimeout(() => ripple.remove(), 560);
 
-          // Four tiny diamond crown sparkles bursting outward
           const offsets = [
             { x: -18, y: -18 },
             { x: 18, y: -16 },
